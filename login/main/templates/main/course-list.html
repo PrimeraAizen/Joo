@@ -1,0 +1,27 @@
+{% extends 'main/base.html'%}
+
+
+{% block maincontent %}
+<h2>List of courses</h2>
+<aside style="position: absolute; left: 0; top: 20%;">
+    <form method="get" action="{% url 'courses' %}">
+        {{ form.as_p }}
+        <button type="submit">Filter</button>
+    </form>
+</aside>
+
+    <ul id="userlist">
+            {% for course in courses %}
+            {% if course.published %}
+            <li>
+                <img src="{{ course.image.url }}" alt="" style="width: 150px;">
+                Course: "{{ course.title }}"
+                Price: <b>{{ course.price }} tg/mon</b>
+                <a href="{% url 'course-details' course.id %}">Details</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <button class="btn btn-link"><a href="{% url 'create-course' %}">Create course</a></button>
+{% endblock %}

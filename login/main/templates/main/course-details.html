@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block maincontent %}
+    <div class="details">
+        <img src="{{ course.image.url }}" alt="" style="width: 350px; border-radius: 15px">
+    <div>
+         <h1>{{ course.title }}</h1>
+            Автор: <span>{{ course.author }}</span><br><br>
+                {{ course.description }}<br>
+                <h1>{{ course.price }}</h1><br>
+        {% if user.is_staff %}
+            <button class="login" style="background: #5293BB;"><a href="{% url 'course-update' course.id %}">Edit</a></button>
+        <button class="delete"><a href="{% url 'course-delete' course.id %}">Delete</a></button>
+        {% endif %}
+
+    </ul>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block maincontent %}
+    <div class="form-container">
+        
+        <div class="logform">
+                <h1>Add a course</h1>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.title }}<br>
+                    {{ form.author }}<br>
+                    {{ form.description }}<br>
+                    {{ form.price }} <br>
+                    {{ form.image }} <br>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            {{ form.errors }}
+
+            
+        </div>
+    </div>
+{% endblock %}

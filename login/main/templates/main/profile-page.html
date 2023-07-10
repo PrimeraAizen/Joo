@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+{{ user.username }}
+{% endblock %}
+
+{% block maincontent %}
+<div class="details">
+    <img src="{{ user.profile.image.url }}" alt="" style="width: 350px; border-radius: 15px">
+    <div>
+        <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+        Username: <span>{{ user.username }}</span><br><br>
+        
+
+        {{ user.profile.bio }}<br>
+        {% if user.is_staff or user.id == request.user.id %}
+        <button class="login" style="background: #5293BB;"><a href="{% url 'update' user.id %}">Edit</a></button>
+        <button class="delete"><a href="{% url 'delete' user.id %}">Delete</a></button>
+        {% endif %}
+    </div>
+    
+</div>
+<h1>Last Viewed Items</h1>
+    
+    <ul style="list-style-type: none; display: flex; width: 30%; align-items: center; justify-content: space-between;">
+        {% for course in courses %}
+            <li>
+                <div class="card">
+                    <img src="{{ course.image.url }}" alt="" style="width: 100px;">
+                </div>
+                {{ course.title }}
+            </li>
+        {% empty %}
+            <li>No items viewed yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

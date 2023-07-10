@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="icon" href="https://apk-dl.com/detail/image/com.joo-w250.png">
+</head>
+
+<body>
+        <div class="container">
+        <div class="navbar">
+        <img src="{% static 'main/img/logo.svg' %}" alt="" id="logo">
+        {% if request.user.is_authenticated %}
+            <div>
+                <span>Hello, <button class="btn btn-link"><a href="{% url 'profile' request.user.id %}">{{ request.user }}</a></button> </span>
+                {% if request.user.is_staff %}
+                    <button class="btn btn-link"><a href="{% url 'admin' %}">Admin</a></button>
+
+                    {% endif %}
+
+                    <button class="btn btn-link"><a href="{% url 'courses' %}">Courses</a></button>
+                <button class="btn btn-link"><a href="{% url 'logout' %}">Logout</a></button>
+
+            </div>
+            {% else %}
+            <div>
+                <button class="btn btn-link"><a href="{% url 'courses' %}">Courses</a></button>
+                <button class="login"><a href="{% url 'login' %}">Login</a></button>
+                <button class="regbtn"><a href="{% url 'register' %}">Registration</a></button>
+            </div>
+        {% endif %}
+        
+        </div>
+        {% block maincontent %}
+        {% endblock %}
+            <div class="line"></div>
+
+    <div class="footer">
+        <div class="text4">
+            <img src="https://static.tildacdn.com/tild3832-6666-4130-a630-633562653136/joo_logo.svg" alt="">
+            <p>РЕСМИ СЕРIКТЕС</p>
+        <img src="https://static.tildacdn.com/tild6632-6163-4136-b230-653831303532/test_kz.svg" alt="">
+        </div>
+        <div class="logos">
+            <img src="https://static.tildacdn.com/tild3438-3335-4337-b665-363562373236/inst.svg" alt="">
+            <img src="https://static.tildacdn.com/tild6635-3930-4336-a664-373762346430/tiktok.svg" alt="">
+            <img src="https://static.tildacdn.com/tild3231-6137-4666-b534-343036633837/telegram.svg" alt="">
+            <img src="https://static.tildacdn.com/tild6435-6666-4537-b566-616237313132/youtube.svg" alt="">
+        </div>
+        <div class="line2"></div>
+        <p id="copyright"> ТОО “JOO Analytics” © 2021 Все правы защищены.</p>
+    </div>
+
+</div>
+</body>
+
+</html>

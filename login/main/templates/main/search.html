@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block maincontent %}
+<h2>Search results</h2>
+{% for course in courses %}
+{% if course.published %}
+<div>
+    <img src="{{ course.image.url }}" alt="" style="width: 150px;">
+    Course: "{{ course.title }}"
+    Price: <b>{{ course.price }} tg/mon</b>
+    <a href="{% url 'course-details' course.id %}">Details</a>
+</div>
+{% endif %}
+{% endfor %}
+{% endblock %}

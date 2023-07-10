@@ -1,0 +1,106 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Administration
+{% endblock %}
+
+{% block maincontent %}
+    <div class="container">
+
+    <table class="table">
+    <div style="display: flex; justify-content: space-between; width: 60%">
+        <h2>Manage users</h2>
+    <button class="btn btn-link"><a href="{% url 'register' %}">Create a user</a></button>
+    </div>
+
+  <thead>
+    <tr>
+      <th scope="col">№</th>
+      <th scope="col">Username</th>
+      <th scope="col">Full name</th>
+      <th scope="col">email</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for user in users %}
+    <tr>
+      <th scope="row">{{ user.id }}</th>
+      <td>{{ user.username }}</td>
+      <td>{{ user.last_name }} {{ user.first_name }}</td>
+      <td>{{ user.email }}</td>
+        <td><a href="{% url 'update' user.id %}">Edit</a></td>
+        <td><a href="{% url 'delete' user.id %}">Delete</a></td>
+    </tr>
+
+  </tbody>
+        {% endfor %}
+</table>
+<div style="display: flex; justify-content: space-between; width: 60%">
+    <h2>Manage requests</h2>
+    
+</div>
+    <table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col">№</th>
+
+      <th scope="col">User</th>
+      <th scope="col">Course</th>
+      <th scope="col">Published</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for publish_request in requests %}
+   
+    <tr>
+      <th scope="row">{{ publish_request.id }}</th>
+      <td>{{ publish_request.user.username }}</td>
+      <td>{{ publish_request.course.title }}</td>
+      <td>{{ publish_request.approved }}</td>
+      <td><a href="{% url 'accept_request' publish_request.id %}">Approve</a></td>
+      <td><a href="{% url 'reject_request' publish_request.id %}">Reject</a></td>
+    </tr>
+
+  </tbody>
+  {% endfor %}
+</table>
+<div style="display: flex; justify-content: space-between; width: 60%">
+  <h2>Manage courses</h2>
+  <button class="btn btn-link"><a href="{% url 'create-course' %}">Create a course</a></button>
+
+</div>
+  <table class="table">
+
+<thead>
+  <tr>
+    <th scope="col">№</th>
+
+    <th scope="col">Title</th>
+    <th scope="col">Author</th>
+    <th scope="col">Description</th>
+      <th scope="col">Price</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+  </tr>
+</thead>
+<tbody>
+ {% for course in courses %}
+ 
+  <tr>
+    <th scope="row">{{ course.id }}</th>
+    <td>{{ course.title }}</td>
+    <td>{{ course.author }}</td>
+    <td>{{ course.description }}</td>
+      <td>{{ course.price }}</td>
+      <td><a href="{% url 'course-update' course.id %}">Edit</a></td>
+      <td><a href="{% url 'course-delete' course.id %}">Delete</a></td>
+  </tr>
+
+</tbody>
+{% endfor %}
+</table>
+    </div>
+{% endblock %}

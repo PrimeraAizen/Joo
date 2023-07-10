@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block maincontent %}
+    <div class="form-container">
+        
+        <div class="logform">
+        
+                <h1>Registration</h1>
+
+                
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.first_name.label }} <br>
+                    {{ form.first_name }} <br>
+                    {{ form.last_name.label }} <br>
+                    {{ form.last_name }} <br>
+                    {{ form.username.label }} <br>
+                    {{ form.username }} <br>
+                    {{ form.password1.label }} <br>
+                    {{ form.password1 }} <br>
+                    {{ form.password2.label }} <br>
+                    {{ form.password2 }} <br>
+                    {{ form.email.label }} <br>
+                    {{ form.email }} <br>
+                    
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            {{ form.errors }}
+
+            
+            <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+        </div>
+    </div>
+{% endblock %}
